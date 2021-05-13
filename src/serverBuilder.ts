@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import compression from 'compression';
+import cors from 'cors';
 import { OpenapiViewerRouter, OpenapiRouterConfig } from '@map-colonies/openapi-express-viewer';
 import { getErrorHandlerMiddleware } from '@map-colonies/error-express-handler';
 import { middleware as OpenApiMiddleware } from 'express-openapi-validator';
@@ -12,7 +13,7 @@ import { printSchema } from 'graphql';
 import { ApolloServer } from 'apollo-server-express';
 import { Services } from './common/constants';
 import { IConfig } from './common/interfaces';
-import { getResolvers } from './graphql';
+import { getResolvers } from './graphql/resolvers';
 
 @injectable()
 export class ServerBuilder {
@@ -43,6 +44,8 @@ export class ServerBuilder {
 
   private registerPreRoutesMiddleware(): void {
     this.serverInstance.use(httpLogger({ logger: this.logger }));
+
+    this.serverInstance.use(cors());
 
     if (this.config.get<boolean>('server.response.compression.enabled')) {
       this.serverInstance.use(compression(this.config.get<compression.CompressionFilter>('server.response.compression.options')));
