@@ -44,5 +44,10 @@
     "3d": {
       "url": "INGESTION_SERVICE_3D_URL"
     }
+  },
+  "jobServices": {
+    "raster": {
+      "url": "JOB_SERVICE_RASTER_URL"
+    }
   }
 }
