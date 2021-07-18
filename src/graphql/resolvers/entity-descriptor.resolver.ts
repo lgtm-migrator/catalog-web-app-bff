@@ -5,7 +5,7 @@ import { container } from 'tsyringe';
 import { Resolver, Query } from 'type-graphql';
 import { Services } from '../../common/constants';
 import { pycswCatalogRecordUIAspects } from '../../common/pycswRecord.ui-aspect';
-import categoriesTranslation from '../../common/translations/category.trsanslation';
+import categoriesTranslation from '../../common/ui-aspects/category.trsanslation';
 import { Group, groupBy } from '../../helpers/group-by';
 import { CategoryConfig, EntityDescriptor, FieldConfig } from '../entityDescriptor';
 
@@ -50,7 +50,7 @@ export class EntityDescriptorResolver {
       const category = categoryInfo.key.category as FieldCategory;
       return {
         category: category,
-        categoryTitle: categoriesTranslation[category],
+        categoryTitle: categoriesTranslation[category].displayKey,
         fields: categoryInfo.items.map((field: IPropFieldConfigInfo) => {
           const fieldConfig = this.buildField(field, recordType.name);
           if (field.subFields !== undefined) {
