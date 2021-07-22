@@ -21,19 +21,38 @@ export class IngestionManager3D implements IIngestionManagerService {
   private buildPayload(data: IngestionData): AxiosRequestConfig {
     const payloadData = {
       modelPath: data.directory,
+      tilesetFilename: data.fileNames[0],
       metadata: {
         ...data.metadata,
         identifier: data.metadata.id,
+        title: data.metadata.productName,
+        producerName: 'IDFMU',
         typename: '3D',
         schema: '3d_schema',
         mdSource: '3d_mdSource',
         xml: '3d_xml',
+        insertDate: new Date().toISOString(),
         anytext: `${data.metadata.productName} ${data.metadata.description ?? ''} ${
           data.metadata.sensorType ? data.metadata.sensorType.join(',') : ''
         } ${(data.metadata as Layer3DRecordInput).version ?? ''}`,
-        insertDate: new Date().toISOString(),
+        sensorType: data.metadata.sensorType ? data.metadata.sensorType.join(',') : '',
+        accuracyLE90: String((data.metadata as Layer3DRecordInput).accuracyLE90),
+        nominalResolution:
+          (data.metadata as Layer3DRecordInput).nominalResolution !== undefined
+            ? String((data.metadata as Layer3DRecordInput).nominalResolution)
+            : undefined,
+        estimatedPrecision:
+          (data.metadata as Layer3DRecordInput).estimatedPrecision !== undefined
+            ? String((data.metadata as Layer3DRecordInput).estimatedPrecision)
+            : undefined,
+        measuredPrecision:
+          (data.metadata as Layer3DRecordInput).measuredPrecision !== undefined
+            ? String((data.metadata as Layer3DRecordInput).measuredPrecision)
+            : undefined,
+        // sourceDateStart: data.metadata.timeBegin,
+        // sourceDateEnd: data.metadata.timeEnd,
+        footprint: (data.metadata as Layer3DRecordInput).wktGeometry,
       },
-      tilesetFilename: data.fileNames[0],
     };
     return {
       data: {
