@@ -20,8 +20,8 @@ export class IngestionManagerRaster implements IIngestionManagerService {
   private buildPayload(data: IngestionData): AxiosRequestConfig {
     const payloadData = {
       originDirectory: data.directory,
-      metadata: data.metadata,
       fileNames: data.fileNames,
+      metadata: data.metadata,
     };
     return {
       data: {
