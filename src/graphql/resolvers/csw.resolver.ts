@@ -6,7 +6,7 @@ import { CatalogManager } from '../../common/catalog-manager/catalog-manager';
 import { Services } from '../../common/constants';
 import { IngestionManager } from '../../common/ingestion-manager/ingestion-manager';
 import { CSW } from '../../csw/csw';
-import { Ingestion3DData, IngestionRasterData, RecordUpdatePartial, SearchOptions } from '../inputTypes';
+import { Ingestion3DData, IngestionRasterData, RecordUpdatePartial, SearchOptions, StringArray } from '../inputTypes';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const LayerMetadataMixedUnion = createUnionType({
@@ -36,6 +36,7 @@ export class LayerMetadataMixedResolver {
     this.catalogManager = container.resolve(CatalogManager);
     this.ingestionManager = container.resolve(IngestionManager);
   }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Query((type) => [LayerMetadataMixedUnion])
   public async search(
@@ -55,12 +56,29 @@ export class LayerMetadataMixedResolver {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @Query((type) => [LayerMetadataMixedUnion])
+  public async searchById(
+    @Arg('idList', { nullable: false })
+    idList: StringArray
+  ): Promise<LayerMetadataUnionType[]> {
+    try {
+      const data = await this.csw.getRecordsById(idList.value);
+      return data;
+    } catch (err) {
+      this.logger.error(err);
+      throw err;
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Mutation((type) => String)
   public async updateMetadata(
     @Arg('data')
     data: RecordUpdatePartial
   ): Promise<string> {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const newRecord = await this.catalogManager.updateMetadata(data);
       return 'ok';
     } catch (err) {
@@ -69,12 +87,14 @@ export class LayerMetadataMixedResolver {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Mutation((type) => String)
   public async startRasterIngestion(
     @Arg('data')
     data: IngestionRasterData
   ): Promise<string> {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const newRecord = await this.ingestionManager.ingest(data);
       return 'ok';
     } catch (err) {
@@ -83,12 +103,14 @@ export class LayerMetadataMixedResolver {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Mutation((type) => String)
   public async start3DIngestion(
     @Arg('data')
     data: Ingestion3DData
   ): Promise<string> {
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const newRecord = await this.ingestionManager.ingest(data);
       return 'ok';
     } catch (err) {

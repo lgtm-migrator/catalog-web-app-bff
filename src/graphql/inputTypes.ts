@@ -162,4 +162,10 @@ export class JobUpdateData {
   public priority?: number;
 }
 
+@InputType()
+export class StringArray {
+  @Field((type) => [String])
+  public value: string[];
+}
+
 export type IngestionData = Ingestion3DData | IngestionRasterData;
