@@ -45,6 +45,11 @@ export class EntityDescriptorResolver {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       ...pycswCatalogRecordUIAspects[recordType][fieldUIApect],
       ...restFieldConfigProps,
+      // eslint-disable-next-line
+      isRequired:
+        restFieldConfigProps.validation && restFieldConfigProps.validation?.findIndex((validation) => validation.type === 'required') > -1
+          ? true
+          : false,
     };
   }
 

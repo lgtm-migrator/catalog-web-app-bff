@@ -1,5 +1,12 @@
 import { Logger } from '@map-colonies/js-logger';
-import { PycswLayerCatalogRecord, PycswBestCatalogRecord, Pycsw3DCatalogRecord, RecordType, IPropPYCSWMapping } from '@map-colonies/mc-model-types';
+import {
+  PycswLayerCatalogRecord,
+  PycswBestCatalogRecord,
+  Pycsw3DCatalogRecord,
+  RecordType,
+  IPropPYCSWMapping,
+  ProductType,
+} from '@map-colonies/mc-model-types';
 import { inject, singleton } from 'tsyringe';
 import { get, intersection } from 'lodash';
 import { CatalogRecordType, Services } from '../common/constants';
@@ -58,14 +65,33 @@ export class CSW {
       sort: opts?.sort ? [...opts.sort] : undefined,
     };
 
+    /*  TODO: remove when ORTHOPHOTO_HISTORY will be revealed in UI in proper place */
+    const rasterOpts = {
+      filter: [
+        ...newOpts.filter,
+        {
+          field: 'mc:productType',
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          neq: ProductType.ORTHOPHOTO_HISTORY,
+        },
+      ],
+      sort: newOpts.sort,
+    };
+
     if (typeFilterIdx > NOT_FOUND) {
       const fetchRecordType = get(opts?.filter, `[${typeFilterIdx}].eq`) as keyof typeof RecordType;
       switch (RecordType[fetchRecordType]) {
         case RecordType.RECORD_ALL:
-          getRecords.push(...this.getEntitiesCswInstances().map(async (client) => client.instance.getRecords(start, end, newOpts)));
+          getRecords.push(
+            ...this.getEntitiesCswInstances().map(async (client) => {
+              return client.entities.includes(RecordType.RECORD_RASTER)
+                ? client.instance.getRecords(start, end, rasterOpts)
+                : client.instance.getRecords(start, end, newOpts);
+            })
+          );
           break;
         case RecordType.RECORD_RASTER:
-          getRecords.push(this.cswClients.RASTER.instance.getRecords(start, end, newOpts));
+          getRecords.push(this.cswClients.RASTER.instance.getRecords(start, end, rasterOpts));
           break;
         case RecordType.RECORD_3D:
           getRecords.push(this.cswClients['3D'].instance.getRecords(start, end, newOpts));
