@@ -49,7 +49,7 @@ export class EntityDescriptorResolver {
       isRequired:
         restFieldConfigProps.validation && restFieldConfigProps.validation?.findIndex((validation) => validation.type === 'required') > -1
           ? true
-          : false,
+          : restFieldConfigProps.isRequired ?? false,
     };
   }
 

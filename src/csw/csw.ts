@@ -112,6 +112,21 @@ export class CSW {
     return data.flat();
   }
 
+  public async getDomain(domain: string, recType: RecordType): Promise<string[]> {
+    const clientType = this.recordTypeToEntity(recType);
+    const data = await this.cswClients[clientType].instance.getDomain(domain);
+    return data;
+  }
+
+  private recordTypeToEntity(recType: RecordType): CatalogRecordItems {
+    switch (recType) {
+      case RecordType.RECORD_3D:
+        return CatalogRecordItems['3D'];
+      default:
+        return CatalogRecordItems.RASTER;
+    }
+  }
+
   private getEntitiesCswInstances(): CswClient[] {
     const servedEntities = this.config.get<string>('servedEntityTypes').split(',');
     return Object.values(this.cswClients).filter((cswClient) => {

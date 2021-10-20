@@ -44,6 +44,18 @@ export class CswClientWrapper {
     return parsedData;
   }
 
+  public async getDomain(domain: string): Promise<string[]> {
+    // eslint-disable-next-line
+    let domainResp = (await this.cswClient.GetDomain(domain))?.['csw:GetDomainResponse'];
+    if (domainResp === undefined) {
+      return [];
+    }
+    const valList = get(domainResp, 'domainValues[0].listOfValues.value') as Record<string, unknown>[];
+    const parsedData = valList.map((val) => get(val, 'content[0]') as string);
+
+    return parsedData;
+  }
+
   private readonly transformRecordsToEntity = (cswArray: CatalogRecordType[]): CatalogRecordType[] => {
     const cswParsedArray = transform(
       cswArray,
