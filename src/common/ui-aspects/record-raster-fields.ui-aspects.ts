@@ -94,6 +94,15 @@ const pycswLayerCatalogRecordAspects = {
   keywords: {
     label: 'field-names.raster.keywords',
   },
+  productSubType: {
+    label: 'field-names.raster.productSubType',
+  },
+  maxResolutionMeter: {
+    label: 'field-names.raster.maxResolutionMeter',
+  },
+  productBoundingBox: {
+    label: 'field-names.raster.productBoundingBox',
+  },
 } as Record<string, any>;
 
 export const pycswLayerCatalogRecordUIAspects = pycswLayerCatalogRecordAspects;

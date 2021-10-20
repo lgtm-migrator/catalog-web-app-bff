@@ -62,9 +62,13 @@ export class LayerRasterRecordInput {
     @Field((type) => ProductType, { nullable: false })
     public productType: ProductType;
     @Field({ nullable: true })
+    public productSubType?: string;
+    @Field({ nullable: true })
     public srsName?: string;
     @Field({ nullable: true })
     public resolution?: number;
+    @Field({ nullable: true })
+    public maxResolutionMeter?: number;
     @Field({ nullable: true })
     public rms?: number;
     @Field({ nullable: true })
@@ -75,6 +79,8 @@ export class LayerRasterRecordInput {
     public layerPolygonParts?: Record<string, unknown>;
     @Field((type) => [String], { nullable: true })
     public includedInBests?: string[];
+    @Field({ nullable: true })
+    public productBoundingBox?: string;
     @Field({ nullable: false })
     public id: string;
     @Field({ nullable: true })
@@ -265,9 +271,13 @@ export class LayerRasterRecord {
     @Field((type) => ProductType, { nullable: false })
     public productType: ProductType;
     @Field({ nullable: true })
+    public productSubType?: string;
+    @Field({ nullable: true })
     public srsName?: string;
     @Field({ nullable: true })
     public resolution?: number;
+    @Field({ nullable: true })
+    public maxResolutionMeter?: number;
     @Field({ nullable: true })
     public rms?: number;
     @Field({ nullable: true })
@@ -278,6 +288,8 @@ export class LayerRasterRecord {
     public layerPolygonParts?: Record<string, unknown>;
     @Field((type) => [String], { nullable: true })
     public includedInBests?: string[];
+    @Field({ nullable: true })
+    public productBoundingBox?: string;
     @Field({ nullable: false })
     public id: string;
     @Field({ nullable: true })
