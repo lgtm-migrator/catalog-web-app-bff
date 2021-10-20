@@ -47,7 +47,9 @@ export class EntityDescriptorResolver {
       ...restFieldConfigProps,
       // eslint-disable-next-line
       isRequired:
-        restFieldConfigProps.validation && restFieldConfigProps.validation?.findIndex((validation) => validation.type === 'required') > -1
+        restFieldConfigProps.validation !== undefined &&
+        // eslint-disable-next-line
+        restFieldConfigProps.validation.findIndex((validation) => validation.type === 'required') > -1
           ? true
           : restFieldConfigProps.isRequired ?? false,
     };
