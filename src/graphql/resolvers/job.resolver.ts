@@ -35,7 +35,7 @@ export class JobResolver {
       return this.transformRecordsToEntity(data);
       // return data;
     } catch (err) {
-      this.logger.error(err);
+      this.logger.error(err as string);
       throw err;
     }
   }
@@ -51,7 +51,7 @@ export class JobResolver {
       const response = await this.updateJobHandler(id, data);
       return 'ok';
     } catch (err) {
-      this.logger.error(err);
+      this.logger.error(err as string);
       throw err;
     }
   }
@@ -60,6 +60,7 @@ export class JobResolver {
     const res = await requestHandler(`${this.serviceURL}/jobs`, 'GET', {
       data: {
         ...params,
+        shouldReturnTasks: false,
       },
     });
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -70,6 +71,7 @@ export class JobResolver {
     const res = await requestHandler(`${this.serviceURL}/jobs/${id}`, 'PUT', {
       data: {
         ...params,
+        shouldReturnTasks: false,
       },
     });
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
@@ -86,8 +88,6 @@ export class JobResolver {
             case 'created':
             case 'updated':
               return new Date(val as string);
-            case 'tasks':
-              return this.transformRecordsToEntity(val as Job[]);
             default:
               return val;
           }

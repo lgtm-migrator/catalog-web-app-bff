@@ -94,9 +94,6 @@ export class Job {
   @Field({ nullable: true })
   public productType?: string;
 
-  @Field((type) => [Task], { nullable: false })
-  public tasks: Task[];
-
   @Field({ nullable: true })
   public created?: Date;
 
