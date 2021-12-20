@@ -56,6 +56,7 @@ const pycswLayerCatalogRecordAspects = {
   },
   'link.name': {
     label: 'field-names.raster.link.name',
+    isCopyable: true,
     fullWidth: true,
   },
   'link.description': {
@@ -119,6 +120,7 @@ const pycswLayerCatalogRecordAspects = {
     label: 'field-names.raster.layerPolygonParts',
     fullWidth: true,
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as Record<string, any>;
 
 export const pycswLayerCatalogRecordUIAspects = pycswLayerCatalogRecordAspects;
