@@ -17,7 +17,6 @@ export const MOCK_JOBS_DATA = [
     productName: 'string',
     productType: 'Orthophoto',
     internalId: 'A very very long internalId',
-
     created: new Date('2021-05-24T05:33:22.199Z'),
     updated: new Date('2021-05-24T05:33:22.199Z'),
     taskCount: 19,
@@ -30,6 +29,7 @@ export const MOCK_JOBS_DATA = [
   {
     id: '5907d4de-3afc-41f2-bc32-a904e34adbc0',
     resourceId: '2_discete_ext',
+    internalId: 'internalId',
     version: 'string',
     type: '3D',
     description: 'string',
@@ -42,7 +42,6 @@ export const MOCK_JOBS_DATA = [
     producerName: 'string',
     productName: 'string',
     productType: 'Orthophoto',
-
     created: new Date('2021-05-24T05:33:51.990Z'),
     updated: new Date('2021-05-24T05:33:51.990Z'),
     taskCount: 2,
@@ -55,6 +54,7 @@ export const MOCK_JOBS_DATA = [
   {
     id: '5907d4de-3afc-41f2-bc32-a904e34adbc8',
     resourceId: '2_discete_ext very very long very very long ',
+    internalId: 'internalId',
     version: 'string',
     type: '3D',
     description: 'string',
@@ -79,6 +79,7 @@ export const MOCK_JOBS_DATA = [
   {
     id: '5907d4de-3afc-41f2-bc32-a904e34adbu6',
     resourceId: '2_discete_ext',
+    internalId: 'internalId',
     version: 'string',
     type: '3D',
     description: 'string',

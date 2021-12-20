@@ -26,11 +26,11 @@ export class TaskResolver {
   @Query((type) => [Task])
   public async tasks(
     @Arg('params', { nullable: true })
-    params?: TasksSearchParams
+    params: TasksSearchParams
   ): Promise<Task[]> {
     try {
-      // const data = await Promise.resolve(this.getTasks(params));
-      const data = await Promise.resolve(MOCK_TASKS_DATA);
+      const data = await Promise.resolve(this.getTasks(params));
+      // const data = await Promise.resolve(MOCK_TASKS_DATA);
       //   return this.transformRecordsToEntity(data);
       return data;
     } catch (err) {
