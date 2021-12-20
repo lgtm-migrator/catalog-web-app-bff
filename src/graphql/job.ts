@@ -1,6 +1,7 @@
 /* eslint-disable import/exports-last, @typescript-eslint/naming-convention */
 import { GraphQLScalarType } from 'graphql';
 import { ObjectType, Field, registerEnumType } from 'type-graphql';
+import { ProductType } from '@map-colonies/mc-model-types';
 
 export const parametersObject = new GraphQLScalarType({ name: 'parametersObject' });
 
@@ -91,8 +92,8 @@ export class Job {
   @Field({ nullable: true })
   public productName?: string;
 
-  @Field({ nullable: true })
-  public productType?: string;
+  @Field((type) => ProductType, { nullable: true })
+  public productType?: ProductType;
 
   @Field({ nullable: true })
   public created?: Date;
@@ -122,4 +123,5 @@ export class Job {
   public isCleaned?: boolean;
 }
 
+const ProductTypeRegister = registerEnumType(ProductType, { name: 'ProductType' });
 const StatusRegister = registerEnumType(Status, { name: 'Status' });
