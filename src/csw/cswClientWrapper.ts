@@ -108,9 +108,12 @@ export class CswClientWrapper {
             }
             case 'links': {
               const linksArr = Array.isArray(val) ? val : [val];
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               const processedLinks = linksArr.map((item: any): Link => {
                 return {
                   protocol: get(item, '$.scheme') as string,
+                  name: get(item, '$.name') as string,
+                  description: get(item, '$.description') as string,
                   url: get(item, '_') as string,
                 };
               });
@@ -137,6 +140,7 @@ export class CswClientWrapper {
       },
       []
     );
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     return cswParsedArray;
   };

@@ -56,6 +56,7 @@ const pycswBestCatalogRecordAspects = {
   },
   'link.name': {
     label: 'field-names.raster.link.name',
+    isCopyable: true,
     fullWidth: true,
   },
   'link.description': {
@@ -94,6 +95,7 @@ const pycswBestCatalogRecordAspects = {
   keywords: {
     label: 'field-names.raster.keywords',
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 } as Record<string, any>;
 
 export const pycswBestCatalogRecordUIAspects = pycswBestCatalogRecordAspects;
