@@ -161,6 +161,11 @@ export class JobsSearchParams {
   @Field({ nullable: true })
   public type?: string;
 }
+@InputType()
+export class TasksSearchParams {
+  @Field({ nullable: false })
+  public jobId: string;
+}
 
 @InputType()
 export class JobUpdateData {
