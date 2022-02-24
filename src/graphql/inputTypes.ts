@@ -194,5 +194,22 @@ export class StringArray {
   @Field((type) => [String])
   public value: string[];
 }
+@InputType()
+export class ExplorerGetById {
+  @Field((type) => String, { nullable: false })
+  public id!: string;
+
+  @Field((type) => RecordType, { nullable: false })
+  public type!: RecordType;
+}
+
+@InputType()
+export class ExplorerGetByPathSuffix {
+  @Field((type) => String, { nullable: false })
+  public pathSuffix!: string;
+
+  @Field((type) => RecordType, { nullable: false })
+  public type!: RecordType;
+}
 
 export type IngestionData = IngestionDemData | Ingestion3DData | IngestionRasterData;
