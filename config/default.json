@@ -60,5 +60,13 @@
       "url": "http://localhost:8000/job-manager-dev-job-manager"
     }
   },
+  "storageExplorerServices": {
+    "raster": {
+      "url": "http://localhost:8000/storage-explorer-raster"
+    },
+    "3d": {
+      "url": "http://localhost:8000/storage-explorer-3d"
+    }
+  },
   "servedEntityTypes": "RECORD_ALL,RECORD_RASTER,RECORD_3D,RECORD_DEM"
 }
