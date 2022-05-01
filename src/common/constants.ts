@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+import he from 'he';
 import { LayerMetadataUnionType } from '../graphql/resolvers/csw.resolver';
 
 export const DEFAULT_SERVER_PORT = 80;
@@ -24,4 +28,27 @@ export const fieldTypes = {
   isKeywords: (fieldName: string): boolean => fieldName === 'keywords',
   isSensor: (fieldName: string): boolean => ['sensorType', 'sensors'].includes(fieldName),
   isRegion: (fieldName: string): boolean => ['region'].includes(fieldName),
+};
+
+export const xmlParserOptions = {
+  attributeNamePrefix: '',
+  attrNodeName: 'attr',
+  textNodeName: '#text',
+  ignoreAttributes: false,
+  ignoreNameSpace: false,
+  allowBooleanAttributes: false,
+  parseNodeValue: true,
+  parseAttributeValue: false,
+  trimValues: true,
+  cdataTagName: '__cdata',
+  cdataPositionChar: '\\c',
+  parseTrueNumberOnly: false,
+  numParseOptions: {
+    hex: true,
+    leadingZeros: true,
+  },
+  arrayMode: (name: string): boolean => name === 'Format' || name === 'TileMatrixSetLink',
+  attrValueProcessor: (val: string): string => he.decode(val, { isAttributeValue: true }),
+  tagValueProcessor: (val: string): string => he.decode(val),
+  alwaysCreateTextNode: false,
 };
