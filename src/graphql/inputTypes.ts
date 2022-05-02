@@ -51,6 +51,7 @@ export class FilterField extends FilterFieldCswClient {
 export class SortField extends SortFieldCswClient {
   @Field({ nullable: false })
   public field: string;
+
   @Field({ nullable: true })
   public desc?: boolean;
 }
@@ -74,9 +75,6 @@ export class RecordsEditableFields {
 
   @Field({ nullable: true })
   public description?: string;
-
-  // @Field((type) => [SensorType], { nullable: true })
-  // public sensorType?: SensorType[];
 
   @Field({ nullable: true })
   public productSubType?: string;
@@ -161,7 +159,14 @@ export class JobsSearchParams {
 
   @Field({ nullable: true })
   public type?: string;
+
+  @Field((type) => Date, { nullable: true })
+  public fromDate?: Date;
+
+  @Field((type) => Date, { nullable: true })
+  public tillDate?: Date;
 }
+
 @InputType()
 export class TasksSearchParams {
   @Field({ nullable: false })
@@ -194,6 +199,7 @@ export class StringArray {
   @Field((type) => [String])
   public value: string[];
 }
+
 @InputType()
 export class ExplorerGetById {
   @Field((type) => String, { nullable: false })

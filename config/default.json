@@ -33,6 +33,14 @@
       "url": "http://localhost:8000/pycsw/version=2.0.0&service=csw"
     }
   },
+  "mapServices": {
+    "raster": {
+      "url": "http://localhost:8000/map-service-raster"
+    },
+    "dem": {
+      "url": "http://localhost:8000/map-service-dem"
+    }
+  },
   "catalogServices": {
     "raster": {
       "url": "http://localhost:8000/catalog-service-raster"
@@ -41,7 +49,7 @@
       "url": "http://localhost:8000/catalog-service-3d"
     },
     "dem": {
-      "url": "http://localhost:8000/catalog-service-dem"
+      "url": "NOT_AVAILABLE"
     }
   },
   "ingestionServices": {
@@ -52,12 +60,12 @@
       "url": "http://localhost:8000/ingestion-service-3d"
     },
     "dem": {
-      "url": "http://localhost:8000/ingestion-service-dem"
+      "url": "NOT_AVAILABLE"
     }
   },
   "jobServices": {
     "raster": {
-      "url": "http://localhost:8000/job-manager-dev-job-manager"
+      "url": "http://localhost:8000/job-manager-service"
     }
   },
   "storageExplorerServices": {
@@ -67,6 +75,21 @@
     "3d": {
       "url": "http://localhost:8000/storage-explorer-3d"
     }
+  },
+  "serviceDiscovery": {
+    "url": "http://localhost:8000/service-discovery"
+  },
+  "externalServices": {
+    "PYCSW-RECORD_RASTER-URL": "https://pycsw_raster.com",
+    "PYCSW-RECORD_3D-URL": "https://pycsw_3d.com",
+    "PYCSW-RECORD_DEM-URL": "https://pycsw_dem.com",
+    "MAP_SERVER-RECORD_RASTER-URL": "https://mapproxy_raster.com",
+    "MAP_SERVER-RECORD_DEM-URL": "https://geoserver_dem.com"
+  },
+  "accessToken": {
+    "attributeName": "x-api-key",
+    "injectionType": "header",
+    "tokenValue": "TOKEN"
   },
   "servedEntityTypes": "RECORD_ALL,RECORD_RASTER,RECORD_3D,RECORD_DEM"
 }
