@@ -25,6 +25,27 @@ export enum DateGranularity {
 registerEnumType(DateGranularity, { name: 'DateGranularityType' });
 
 registerEnumType(FieldCategory, { name: 'FieldCategory' });
+
+// eslint-disable-next-line import/exports-last
+export enum OperationType {
+  INCREMENT,
+  EXPLICIT,
+  COPY,
+}
+
+// eslint-disable-next-line import/exports-last
+export enum FractionType {
+  MAJOR,
+  MINOR,
+  PATCH,
+  DAYS,
+  MONTHS,
+  YEARS,
+}
+
+registerEnumType(OperationType, { name: 'OperationType' });
+registerEnumType(FractionType, { name: 'FractionType' });
+
 export const enumDictionary = new GraphQLScalarType({ name: 'enumDictionary' });
 
 @ObjectType()
@@ -52,6 +73,33 @@ export class Autocompletion {
 
   @Field({ nullable: false })
   public value: string;
+}
+
+@ObjectType()
+export class UpdateRulesOperation {
+  @Field((type) => OperationType, { nullable: true })
+  public type: OperationType;
+
+  @Field((type) => FractionType, { nullable: true })
+  public fraction: FractionType;
+
+  @Field({ nullable: true })
+  public value: number;
+}
+
+@ObjectType()
+export class UpdateRulesValue {
+  @Field((type) => UpdateRulesOperation, { nullable: false })
+  public operation: UpdateRulesOperation;
+}
+
+@ObjectType()
+export class UpdateRules {
+  @Field({ nullable: true })
+  public freeze: boolean;
+
+  @Field((type) => UpdateRulesValue, { nullable: true })
+  public value: UpdateRulesValue;
 }
 
 @ObjectType()
@@ -139,6 +187,9 @@ export class FieldConfig {
 
   @Field((type) => DateGranularity, { nullable: true })
   public dateGranularity?: DateGranularity;
+
+  @Field((type) => UpdateRules, { nullable: true })
+  public updateRules?: UpdateRules;
 }
 
 @ObjectType()
