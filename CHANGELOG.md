@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/MapColonies/catalog-web-app-bff/compare/v1.10.9...v1.11.0) (2022-08-30)
+
+
+### Features
+
+* added rows option to field config and implement for description fields ([54c22c6](https://github.com/MapColonies/catalog-web-app-bff/commit/54c22c6ec9b5a398491d9f23e13b2d23b1958779))
+* added rows option to field config and implement for description fields ([#101](https://github.com/MapColonies/catalog-web-app-bff/issues/101)) ([43d04e4](https://github.com/MapColonies/catalog-web-app-bff/commit/43d04e401ef720694830f5e5af92d0c3ef86453f))
+
+
+### Bug Fixes
+
+* lgtm ([#100](https://github.com/MapColonies/catalog-web-app-bff/issues/100)) ([5345872](https://github.com/MapColonies/catalog-web-app-bff/commit/5345872b4a08a1089f7b8864ea7888c113acc866))
+
 ### [1.10.9](https://github.com/MapColonies/catalog-web-app-bff/compare/v1.10.8...v1.10.9) (2022-08-04)
 
 
