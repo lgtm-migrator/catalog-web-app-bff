@@ -16,6 +16,7 @@ const pycswDemCatalogRecordAspects = {
   description: {
     label: 'field-names.dem.description',
     fullWidth: true,
+    rows: 4,
   },
   updateDate: {
     label: 'field-names.dem.updateDate',

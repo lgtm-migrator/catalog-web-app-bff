@@ -19,6 +19,7 @@ export const pycswQuantizedMeshBestCatalogRecordAspects = {
   description: {
     label: 'field-names.quantized-mesh.description',
     fullWidth: true,
+    rows: 4,
   },
   creationDate: {
     label: 'field-names.quantized-mesh.creationDate',

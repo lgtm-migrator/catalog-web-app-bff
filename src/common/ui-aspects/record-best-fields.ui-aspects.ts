@@ -26,6 +26,7 @@ const pycswBestCatalogRecordAspects = {
   description: {
     label: 'field-names.raster.description',
     fullWidth: true,
+    rows: 4,
   },
   sensors: {
     label: 'field-names.raster.sensors',
