@@ -12,6 +12,7 @@ export const pycswVectorBestCatalogRecordAspects = {
   description: {
     label: 'field-names.vector-raster.description',
     fullWidth: true,
+    rows: 4,
   },
   srsId: {
     label: 'field-names.vector-raster.srsId',

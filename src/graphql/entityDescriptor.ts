@@ -167,6 +167,9 @@ export class FieldConfig {
   @Field({ nullable: true })
   public isCopyable?: boolean; // is field might be copied
 
+  @Field({ nullable: true })
+  public rows?: number; // should present string as text-area controller. rows represents the maximum number of rows to present.
+
   @Field((type) => Autocompletion, { nullable: true })
   public autocomplete?: Autocompletion;
 
