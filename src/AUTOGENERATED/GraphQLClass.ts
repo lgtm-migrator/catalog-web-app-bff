@@ -2,7 +2,7 @@
 /* eslint-disable import/exports-last, @typescript-eslint/naming-convention */
 import { InputType, ObjectType, Field, Resolver, registerEnumType } from "type-graphql";
 import { GraphQLScalarType } from "graphql";
-import { RecordType, ProductType, VerticalDatum, Units, UndulationModel, DataType, NoDataValue } from "@map-colonies/mc-model-types";
+import { RecordType, ProductType, RecordStatus, VerticalDatum, Units, UndulationModel, DataType, NoDataValue } from "@map-colonies/mc-model-types";
 
 @InputType()
 export class LinkInput {
@@ -120,16 +120,14 @@ export class Layer3DRecordInput {
     public minResolutionMeter?: number;
     @Field({ nullable: true })
     public maxResolutionMeter?: number;
-    @Field({ nullable: true })
-    public nominalResolution?: number;
     @Field({ nullable: false })
     public maxAccuracyCE90: number;
     @Field({ nullable: false })
-    public absoluteAccuracyLEP90: number;
+    public absoluteAccuracyLE90: number;
     @Field({ nullable: true })
     public accuracySE90?: number;
     @Field({ nullable: true })
-    public relativeAccuracyLEP90?: number;
+    public relativeAccuracySE90?: number;
     @Field({ nullable: true })
     public visualAccuracy?: number;
     @Field((type) => [String], { nullable: false })
@@ -144,8 +142,6 @@ export class Layer3DRecordInput {
     public srsId: string;
     @Field({ nullable: false })
     public srsName: string;
-    @Field({ nullable: true })
-    public srsOrigin?: string;
     @Field((type) => [String], { nullable: false })
     public region: string[];
     @Field({ nullable: false })
@@ -157,8 +153,6 @@ export class Layer3DRecordInput {
     @Field({ nullable: false })
     public producerName: string;
     @Field({ nullable: true })
-    public productionMethod?: string;
-    @Field({ nullable: true })
     public minFlightAlt?: number;
     @Field({ nullable: true })
     public maxFlightAlt?: number;
@@ -166,6 +160,10 @@ export class Layer3DRecordInput {
     public geographicArea?: string;
     @Field({ nullable: true })
     public productBoundingBox?: string;
+    @Field({ nullable: true })
+    public productSource?: string;
+    @Field((type) => RecordStatus, { nullable: false })
+    public productStatus: RecordStatus;
     @Field({ nullable: false })
     public id: string;
     @Field({ nullable: true })
@@ -360,6 +358,7 @@ export class QuantizedMeshBestRecordInput {
     public productId?: string;
     @Field({ nullable: false })
     public productName: string;
+    // ASSAF: SHOULD REMAIN STRING
     @Field({ nullable: true })
     public productVersion?: string;
     @Field((type) => ProductType, { nullable: false })
@@ -403,11 +402,13 @@ export class QuantizedMeshBestRecordInput {
     @Field({ nullable: false })
     public producerName: string;
     @Field({ nullable: true })
-    public productionMethod?: string;
-    @Field({ nullable: true })
     public geographicArea?: string;
     @Field({ nullable: true })
     public productBoundingBox?: string;
+    @Field({ nullable: true })
+    public productSource?: string;
+    @Field((type) => RecordStatus, { nullable: false })
+    public productStatus: RecordStatus;
     @Field({ nullable: false })
     public id: string;
     @Field({ nullable: true })
@@ -533,16 +534,14 @@ export class Layer3DRecord {
     public minResolutionMeter?: number;
     @Field({ nullable: true })
     public maxResolutionMeter?: number;
-    @Field({ nullable: true })
-    public nominalResolution?: number;
     @Field({ nullable: false })
     public maxAccuracyCE90: number;
     @Field({ nullable: false })
-    public absoluteAccuracyLEP90: number;
+    public absoluteAccuracyLE90: number;
     @Field({ nullable: true })
     public accuracySE90?: number;
     @Field({ nullable: true })
-    public relativeAccuracyLEP90?: number;
+    public relativeAccuracySE90?: number;
     @Field({ nullable: true })
     public visualAccuracy?: number;
     @Field((type) => [String], { nullable: false })
@@ -557,8 +556,6 @@ export class Layer3DRecord {
     public srsId: string;
     @Field({ nullable: false })
     public srsName: string;
-    @Field({ nullable: true })
-    public srsOrigin?: string;
     @Field((type) => [String], { nullable: false })
     public region: string[];
     @Field({ nullable: false })
@@ -570,8 +567,6 @@ export class Layer3DRecord {
     @Field({ nullable: false })
     public producerName: string;
     @Field({ nullable: true })
-    public productionMethod?: string;
-    @Field({ nullable: true })
     public minFlightAlt?: number;
     @Field({ nullable: true })
     public maxFlightAlt?: number;
@@ -579,6 +574,10 @@ export class Layer3DRecord {
     public geographicArea?: string;
     @Field({ nullable: true })
     public productBoundingBox?: string;
+    @Field({ nullable: true })
+    public productSource?: string;
+    @Field((type) => RecordStatus, { nullable: false })
+    public productStatus: RecordStatus;
     @Field({ nullable: false })
     public id: string;
     @Field({ nullable: true })
@@ -773,6 +772,7 @@ export class QuantizedMeshBestRecord {
     public productId?: string;
     @Field({ nullable: false })
     public productName: string;
+    // ASSAF: SHOULD REMAIN STRING
     @Field({ nullable: true })
     public productVersion?: string;
     @Field((type) => ProductType, { nullable: false })
@@ -816,11 +816,13 @@ export class QuantizedMeshBestRecord {
     @Field({ nullable: false })
     public producerName: string;
     @Field({ nullable: true })
-    public productionMethod?: string;
-    @Field({ nullable: true })
     public geographicArea?: string;
     @Field({ nullable: true })
     public productBoundingBox?: string;
+    @Field({ nullable: true })
+    public productSource?: string;
+    @Field((type) => RecordStatus, { nullable: false })
+    public productStatus: RecordStatus;
     @Field({ nullable: false })
     public id: string;
     @Field({ nullable: true })
@@ -867,6 +869,7 @@ export class QuantizedMeshBestRecordResolver {
 
 const RecordTypeRegister = registerEnumType(RecordType, {name: "RecordType"});
 const ProductTypeRegister = registerEnumType(ProductType, {name: "ProductType"});
+const RecordStatusRegister = registerEnumType(RecordStatus, {name: "RecordStatus"});
 const VerticalDatumRegister = registerEnumType(VerticalDatum, {name: "VerticalDatum"});
 const UnitsRegister = registerEnumType(Units, {name: "Units"});
 const UndulationModelRegister = registerEnumType(UndulationModel, {name: "UndulationModel"});

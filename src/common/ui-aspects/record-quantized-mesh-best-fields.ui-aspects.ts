@@ -27,6 +27,7 @@ export const pycswQuantizedMeshBestCatalogRecordAspects = {
   },
   updateDate: {
     label: 'field-names.quantized-mesh.updateDate',
+    fullWidth: true,
   },
   sourceDateStart: {
     label: 'field-names.quantized-mesh.sourceDateStart',
@@ -87,11 +88,15 @@ export const pycswQuantizedMeshBestCatalogRecordAspects = {
   producerName: {
     label: 'field-names.quantized-mesh.producerName',
   },
-  productionMethod: {
-    label: 'field-names.quantized-mesh.productionMethod',
-  },
   geographicArea: {
     label: 'field-names.quantized-mesh.geographicArea',
+  },
+  productSource: {
+    label: 'field-names.quantized-mesh.productSource',
+    fullWidth: true,
+  },
+  productStatus: {
+    label: 'field-names.quantized-mesh.productStatus',
   },
   productBoundingBox: {
     label: 'field-names.quantized-mesh.productBoundingBox',
