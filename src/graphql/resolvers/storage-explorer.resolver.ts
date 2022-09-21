@@ -5,7 +5,7 @@ import { container } from 'tsyringe';
 import { Resolver, Query, Arg, FieldResolver, Root } from 'type-graphql';
 import { Services } from '../../common/constants';
 import { StorageExplorerManager } from '../../common/storage-explorer-manager/storage-explorer-manager';
-import { ExplorerGetById, ExplorerGetByPathSuffix } from '../inputTypes';
+import { ExplorerGetById, ExplorerGetByPathSuffix, ExplorerResolveMetadataAsModel } from '../inputTypes';
 import { DecryptedId, File } from '../storage-explorer';
 import { LayerMetadataMixedUnion } from './csw.resolver';
 
@@ -43,6 +43,14 @@ export class StorageExplorerResolver {
 
     return fileContent;
   }
+
+  @Query((type) => LayerMetadataMixedUnion)
+  public async resolveMetadataAsModel(@Arg('data') data: ExplorerResolveMetadataAsModel): Promise<typeof LayerMetadataMixedUnion> {
+    const fileContent = await this.storageExplorerManager.resolveMetadataAsModel(data);
+
+    return fileContent;
+  }
+
   @Query((type) => LayerMetadataMixedUnion)
   public async getFileById(@Arg('data') data: ExplorerGetById): Promise<typeof LayerMetadataMixedUnion> {
     const { id, type } = data;

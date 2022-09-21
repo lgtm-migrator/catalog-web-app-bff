@@ -200,6 +200,15 @@ export class ExplorerGetByPathSuffix {
 }
 
 @InputType()
+export class ExplorerResolveMetadataAsModel {
+  @Field((type) => String, { nullable: false })
+  public metadata!: string;
+
+  @Field((type) => RecordType, { nullable: false })
+  public type!: RecordType;
+}
+
+@InputType()
 export class CapabilitiesLayersSearchParam {
   @Field((type) => RecordType)
   public recordType: RecordType;
