@@ -469,8 +469,8 @@ export class LayerRasterRecord {
     public sourceDateEnd: Date;
     @Field({ nullable: true })
     public minHorizontalAccuracyCE90?: number;
-    @Field((type) => [String], { nullable: false })
-    public sensors: string[];
+    @Field((type) => [String], { nullable: true })
+    public sensors?: string[];
     @Field((type) => [String], { nullable: false })
     public region: string[];
     @Field({ nullable: true })
@@ -887,6 +887,7 @@ export interface TMCEnums {
         icon: string,
         translationKey: string,
         parent: string,
+        internal: boolean,
         properties: Record<string, unknown>,
     }
 };
@@ -901,6 +902,7 @@ export const mcEnums = Object.values({ ...enumUnionValues }).reduce((enumValues,
                 icon: "",
                 translationKey: "",
                 parent: "",
+                internal: false,
                 properties: {}
             }
         };
