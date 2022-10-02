@@ -875,3 +875,35 @@ const UnitsRegister = registerEnumType(Units, {name: "Units"});
 const UndulationModelRegister = registerEnumType(UndulationModel, {name: "UndulationModel"});
 const DataTypeRegister = registerEnumType(DataType, {name: "DataType"});
 const NoDataValueRegister = registerEnumType(NoDataValue, {name: "NoDataValue"});
+
+export const enumUnionValues = { RecordType, ProductType, RecordStatus, VerticalDatum, Units, UndulationModel, DataType, NoDataValue };
+export type EnumUnionKeys = keyof typeof enumUnionValues;
+const enumsNames = Object.keys(enumUnionValues);
+
+export interface TMCEnums {
+    [unionEnumKey: string]: {
+        enumName: string,
+        realValue: string,
+        icon: string,
+        translationKey: string,
+        parent: string,
+        properties: Record<string, unknown>,
+    }
+};
+
+export const mcEnums = Object.values({ ...enumUnionValues }).reduce((enumValues, mcEumValue, i) => {
+    Object.entries(mcEumValue).forEach(([enumKey, enumVal]) => {
+        enumValues = {
+            ...enumValues,
+            [enumKey]: {
+                enumName: enumsNames[i],
+                realValue: enumVal as string,
+                icon: "",
+                translationKey: "",
+                parent: "",
+                properties: {}
+            }
+        };
+    });
+    return enumValues;
+}, {} as TMCEnums);
