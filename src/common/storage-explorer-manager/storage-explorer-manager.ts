@@ -4,7 +4,7 @@ import { inject, singleton } from 'tsyringe';
 import { CatalogRecordType, fieldTypes, Services } from '../constants';
 import { IConfig } from '../interfaces';
 import { CatalogRecordItems } from '../../utils';
-import { ExplorerGetById, ExplorerGetByPathSuffix } from '../../graphql/inputTypes';
+import { ExplorerGetById, ExplorerGetByPathSuffix, ExplorerResolveMetadataAsModel } from '../../graphql/inputTypes';
 import { File } from '../../graphql/storage-explorer';
 import { CSW } from '../../csw/csw';
 import { LayerMetadataMixedUnion } from '../../graphql/resolvers/csw.resolver';
@@ -50,6 +50,17 @@ export class StorageExplorerManager implements IStorageExplorerManagerService {
 
     const storageExplorerManagerInstance = this.getManagerInstance(data.type);
     const fileContent = await storageExplorerManagerInstance.getFile(data);
+
+    const transformedMetadata = this.transformMetadataJsonToEntity(fileContent);
+
+    return transformedMetadata;
+  }
+
+  public async resolveMetadataAsModel(data: ExplorerResolveMetadataAsModel): Promise<typeof LayerMetadataMixedUnion> {
+    this.logger.info(`[StorageExplorerManager][resolveMetadataAsModel] resolving metadata for type ${data.type}.`);
+
+    const storageExplorerManagerInstance = this.getManagerInstance(data.type);
+    const fileContent = await storageExplorerManagerInstance.resolveMetadataAsModel(data);
 
     const transformedMetadata = this.transformMetadataJsonToEntity(fileContent);
 
