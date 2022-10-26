@@ -18,6 +18,11 @@ export class IngestionManagerRaster implements IIngestionManagerService {
     return data;
   }
 
+  public async updateGeopkg(data: IngestionData): Promise<IngestionData> {
+    await requestHandler(`${this.serviceURL}/layers`, 'POST', this.buildPayload(data));
+    return data;
+  }
+
   private buildPayload(data: IngestionData): AxiosRequestConfig {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { id, ...metadata } = data.metadata;
