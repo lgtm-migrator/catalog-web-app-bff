@@ -152,6 +152,25 @@ export class LayerMetadataMixedResolver {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Mutation((type) => String)
+  public async startRasterUpdateGeopkg(
+    @Arg('data')
+    data: IngestionRasterData
+  ): Promise<string> {
+    try {
+      const updateGeopgkRes = await this.ingestionManager.updateGeopkg(data);
+      if (updateGeopgkRes) {
+        return 'ok';
+      }
+
+      throw new Error('Could not update geopkg with the provided data.');
+    } catch (err) {
+      this.logger.error(err);
+      throw err;
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @Mutation((type) => String)
   public async start3DIngestion(
     @Arg('data')
     data: Ingestion3DData
