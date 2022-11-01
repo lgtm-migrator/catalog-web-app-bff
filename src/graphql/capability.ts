@@ -14,5 +14,8 @@ export class Capability {
   @Field((type) => [String], { nullable: false })
   public tileMatrixSet!: [string];
 
+  @Field((type) => [String], { nullable: true })
+  public resourceURL: [string];
+
   // Partial and can be extended according to the full OWS format of getCapabilities
 }

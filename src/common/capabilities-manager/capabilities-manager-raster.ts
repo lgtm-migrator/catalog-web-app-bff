@@ -35,6 +35,7 @@ export class CapabilitiesManagerRaster implements ICapabilitiesManagerInstance {
       style: layer['Style']['ows:Identifier'],
       format: layer['Format'],
       tileMatrixSet: layer['TileMatrixSetLink'].map((link: { TileMatrixSet: string }) => link.TileMatrixSet),
+      resourceURL: layer['ResourceURL']['attr']['template'],
     }));
     // eslint-disable-next-line
     return capabilityList ?? [];
