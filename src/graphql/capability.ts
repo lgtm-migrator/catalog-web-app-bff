@@ -12,10 +12,10 @@ export class Capability {
   public format!: [string];
 
   @Field((type) => [String], { nullable: false })
-  public tileMatrixSet!: [string];
+  public tileMatrixSetID!: [string];
 
   @Field((type) => [String], { nullable: true })
-  public resourceURL: [string];
+  public url: [string];
 
   // Partial and can be extended according to the full OWS format of getCapabilities
 }

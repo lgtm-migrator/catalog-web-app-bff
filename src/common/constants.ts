@@ -48,7 +48,7 @@ export const xmlParserOptions = {
     hex: true,
     leadingZeros: true,
   },
-  arrayMode: (name: string): boolean => name === 'Format' || name === 'TileMatrixSetLink' || name === 'Layer',
+  arrayMode: (name: string): boolean => name === 'Format' || name === 'TileMatrixSetLink' || name === 'Layer' || name === 'ResourceURL',
   attrValueProcessor: (val: string): string => he.decode(val, { isAttributeValue: true }),
   tagValueProcessor: (val: string): string => he.decode(val),
   alwaysCreateTextNode: false,
