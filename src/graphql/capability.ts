@@ -1,6 +1,18 @@
 import { Field, ObjectType } from 'type-graphql';
 
 @ObjectType()
+export class ResourceURL {
+  @Field((type) => String, { nullable: false })
+  public format!: string;
+
+  @Field((type) => String, { nullable: false })
+  public resourceType!: string;
+
+  @Field((type) => String, { nullable: false })
+  public template!: string;
+}
+
+@ObjectType()
 export class Capability {
   @Field((type) => String, { nullable: false })
   public id!: string;
@@ -9,13 +21,13 @@ export class Capability {
   public style!: string;
 
   @Field((type) => [String], { nullable: false })
-  public format!: [string];
+  public format!: string[];
 
   @Field((type) => [String], { nullable: false })
-  public tileMatrixSetID!: [string];
+  public tileMatrixSetID!: string[];
 
-  @Field((type) => [String], { nullable: true })
-  public url: [string];
+  @Field((type) => [ResourceURL], { nullable: true })
+  public url: ResourceURL[];
 
   // Partial and can be extended according to the full OWS format of getCapabilities
 }
