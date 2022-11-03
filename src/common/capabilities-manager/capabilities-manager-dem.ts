@@ -35,6 +35,7 @@ export class CapabilitiesManagerDem implements ICapabilitiesManagerInstance {
       style: layer['Style']['ows:Identifier'],
       format: layer['Format'],
       tileMatrixSetID: layer['TileMatrixSetLink'].map((link: { TileMatrixSet: string }) => link.TileMatrixSet),
+      url: layer['ResourceURL'].map((resourceURL: { attr: { template: string } }) => resourceURL.attr.template),
     }));
     // eslint-disable-next-line
     return capabilityList ?? [];
