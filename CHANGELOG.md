@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.3](https://github.com/MapColonies/catalog-web-app-bff/compare/v1.12.2...v1.12.3) (2022-11-07)
+
+
+### Bug Fixes
+
+* raster insertdate granularity ([#124](https://github.com/MapColonies/catalog-web-app-bff/issues/124)) ([840a1b7](https://github.com/MapColonies/catalog-web-app-bff/commit/840a1b74e3f493982bc279c487846233f6bbcdc0))
+
 ### [1.12.2](https://github.com/MapColonies/catalog-web-app-bff/compare/v1.12.0...v1.12.2) (2022-11-06)
 
 
